@@ -35,7 +35,7 @@
     /* ── Nav ── */
     nav { position: sticky; top: 0; z-index: 100; background: var(--cream); border-bottom: 1px solid var(--rule); }
     .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem var(--pad); max-width: var(--max); margin: 0 auto; }
-    .nav-logo { font-family: var(--body); font-size: 1rem; font-weight: 400; color: var(--ink); text-decoration: none; }
+    .nav-logo { font-family: var(--body); font-size: 1.25rem; font-weight: 500; color: var(--ink); text-decoration: none; }
     .nav-logo .excl { color: var(--orange); }
     .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
     .nav-links a { font-family: var(--body); font-size: 1rem; font-weight: 400; color: var(--ink); text-decoration: none; transition: color 0.2s; }
@@ -402,7 +402,7 @@
         <h2>Let's talk. Tell us what you're <em>working on.</em></h2>
         <p>We'll be in touch!</p>
       </div>
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+      <form class="contact-form" action="https://formspree.io/f/meebzrqo" method="POST">
         <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your name" required /></div>
         <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required /></div>
         <div class="form-group"><label for="org">Organisation</label><input type="text" id="org" name="organisation" placeholder="Where do you work?" /></div>
@@ -427,14 +427,7 @@
       btn.setAttribute('aria-expanded', String(!isOpen));
       body.classList.toggle('open', !isOpen);
     }
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = 'Sent!';
-      btn.style.background = '#6B6560';
-      btn.disabled = true;
-      e.target.reset();
-    }
+
   </script>
 </body>
 </html>
