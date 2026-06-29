@@ -139,6 +139,7 @@
     .about-text h2 em { font-style: italic; color: var(--orange); }
     .about-text p { font-family: var(--body); font-size: 1.0625rem; color: var(--mid); line-height: 1.85; margin-bottom: 1rem; font-weight: 300; }
     .about-image img { width: 100%; height: 560px; object-fit: cover; object-position: center 35%; display: block; }
+    .about-image { order: -1; }
 
     /* Profile photos — large, face visible */
     .about-profiles { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; padding-top: 3rem; border-top: 1px solid var(--rule); }
@@ -170,17 +171,47 @@
     .footer-meta, .footer-langs { font-family: var(--body); font-size: 0.875rem; color: rgba(242,237,228,0.5); }
 
     /* ── Responsive ── */
+    /* Hamburger */
+    .nav-burger { display: none; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--ink); padding: 0.25rem; }
+
     @media (max-width: 860px) {
       .hero-inner, .about-top, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .hero-image { order: -1; }
-      .hero-image img { height: 380px; }
+      .hero-image img { height: 55vw; min-height: 280px; object-position: top center; }
       .services-grid { grid-template-columns: 1fr; }
       .service-card { border-right: none; border-bottom: 1px solid var(--rule); padding: 2rem 0 !important; }
       .focus-grid { grid-template-columns: 1fr 1fr; }
       .about-profiles { grid-template-columns: 1fr; }
-      .profile img { height: 320px; }
-      .nav-links { display: none; }
+      .about-image img { height: 75vw; object-position: center 40%; }
+      .profile img { height: 75vw; object-position: center 15%; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+
+      /* Mobile nav */
+      .nav-burger { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--cream);
+        border-bottom: 1px solid var(--rule);
+        flex-direction: column;
+        gap: 0;
+        padding: 0.5rem 0;
+        z-index: 200;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a {
+        display: block;
+        padding: 0.85rem var(--pad);
+        border-bottom: 1px solid var(--rule);
+        font-size: 1rem;
+      }
+      .nav-links li:last-child a { border-bottom: none; }
+      .nav-cta { border: none !important; border-radius: 0 !important; padding: 0.85rem var(--pad) !important; }
+      nav { position: sticky; top: 0; }
     }
     @media (max-width: 560px) {
       .focus-grid { grid-template-columns: 1fr; }
@@ -196,7 +227,8 @@
   <nav>
     <div class="nav-inner">
       <a href="#top" class="nav-logo">Let's Talk, Team<span class="excl">!</span></a>
-      <ul class="nav-links">
+      <button class="nav-burger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#services">Services</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -447,6 +479,10 @@
   </footer>
 
   <script>
+    function toggleMenu() {
+      const links = document.getElementById('nav-links');
+      links.classList.toggle('open');
+    }
     function toggleAccordion(btn) {
       const body = btn.nextElementSibling;
       const isOpen = btn.getAttribute('aria-expanded') === 'true';
